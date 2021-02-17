@@ -45,8 +45,6 @@ function Airplane(name) {
   this.stomach = [];
  };
 
-   const shannon = new Person("Shannon", 32);
-
    Person.prototype.eat = function(somefood) { 
     if (this.stomach.length < 10)
      this.stomach.push(somefood);
@@ -56,8 +54,8 @@ function Airplane(name) {
       this.stomach = [];
     }
   
-    Person.prototype.toSTring = function() {
-      console.log(`${this.name},${this.age}`);
+    Person.prototype.toString = function() {
+       return `${this.name},${this.age}`;
     };
   
   
@@ -77,10 +75,18 @@ function Airplane(name) {
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- function Car() {
-    
+ function Car(model, milesPerGallon) {
+    this.model =model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+
+  Car.prototype.fill = function(gallons){
+    this.tank += gallons
   }
   
+
   
   /*
     TASK 3
@@ -89,18 +95,28 @@ function Airplane(name) {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
-   
-  }
+ function Baby(name, age, favoriteToy) {
+
+  Person.call(this, name, age);
+  this.favoriteToy = favoriteToy;
+
  
+   };
+
+  Baby.prototype = Object.create(Person.prototype);
+  Baby.prototype.play = function(){
+    return `Playing with ${this.favoriteToy}`;
+  };
+  
+  
   
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
-    1. 
-    2. 
-    3. 
-    4. 
+    1. global scope, just refers to the window
+    2. implicit binding- when context tells the system what "this" is referring to (such as in an object)
+    3.  new binding- when we use a prototype to create an object, "this" follows to the new information
+    4. explicit- refers to a specific object 
   */
   
   
